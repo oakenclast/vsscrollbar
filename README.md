@@ -125,7 +125,7 @@ Result of the above filter command is two items, because two items contain the s
 
 vsscrollbarEvent.filter($scope, 'e');
 ```
-Result of the above filter command is two objects, ecause two objects contain the string **e**.
+Result of the above filter command is two objects, because two objects contain the string **e**.
 
 
 In the **examples** folder of this project has the sample app and the online demo 
