@@ -10,7 +10,7 @@ AngularJS directive which implements the virtual scroll, filtering of the items 
 
 ### 2. filtering
 * if scrollbar items are array of strings - filtering by string value
-* if scrollbar items are array of objects - filtering by string value with multiple properties
+* if scrollbar items are array of objects - filtering by string from all properties of the object
 
 ### 3. customizable scrollbar
 * custom scrollbar is used instead of native scrollbar of the browser
@@ -26,7 +26,7 @@ AngularJS directive which implements the virtual scroll, filtering of the items 
 ```
 * inject the **vsscrollbar** module into your application module.
 ```js
-angular.module('vsscrollbarapp', ['vsscrollbar']);
+angular.module('vssampleapp', ['vsscrollbar']);
 ```
 * add **vsscrollbar** HTML tag into your HTML file. See the **HTML example** paragraph below.
 * add needed Javascript code. See the **Javascript example** paragraph below.
@@ -37,14 +37,15 @@ angular.module('vsscrollbarapp', ['vsscrollbar']);
              on-scroll-change-fn="onScrollChange(topIndex, maxIndex, topPos, maxPos, 
                                   filteredPageCount, filteredItemCount, visibleItems)">
     <!- parent implements this part - begin -->                              
-    <div id="item" ng-repeat="item in visibleItems track by $index" ng-click="itemClicked($index, item);">
+    <div id="item" ng-repeat="item in visibleItems track by $index" 
+                   ng-click="itemClicked($index, item);">
         <div id="itemtext">{{item}}</div>
     </div>
     <!- parent implements this part - end -->
 </vsscrollbar>
 ```
 
-It is also possible to use **ng-model="response"** instead of **on-scroll-change-fn** callback to get response of the scrollbar directive.
+It is also possible to use **ng-model="response"** instead of **on-scroll-change-fn** callback to get responses from the scrollbar component.
 
 ### Tags
 | Tag  | Description | Mandatory | 
@@ -60,7 +61,7 @@ It is also possible to use **ng-model="response"** instead of **on-scroll-change
 | items-in-page | visible item count in the vsscrollbar | yes |
 | height | height of the scrollbar | no |
 | on-scroll-change-fn | callback function which is called by the vsscrollbar when the scroll change occurs | yes if *ng-model* is not used |
-| ng-model | updated by the vsscrollbar when scroll change occurs | yes if *non-scroll-change-fn* is not used |
+| ng-model | updated by the vsscrollbar when scroll change occurs | yes if *on-scroll-change-fn* is not used |
 
 
 ### Javascript example
@@ -80,7 +81,7 @@ $scope.onScrollChange = function (topIndex, maxIndex, topPos, maxPos,
 
 By injecting the **vsscrollbarEvent** the parent can send events to the vsscrollbar component by calling service functions. 
 
-For example add item *My item* to index *2*.
+For example add item named "**My item**" to the index "**2**".
 
 ```js
 vsscrollbarEvent.addItem($scope, 2, 'My item');
@@ -105,7 +106,7 @@ vsscrollbarEvent.addItem($scope, 2, 'My item');
 
 vsscrollbarEvent.filter($scope, '2');
 ```
-Result of the above filter command is array of items. Two items contain the string **2**.
+Result of the above filter command is two items, because two items contain the string **2**.
 
 2) Items are array of objects
 ```js
@@ -124,7 +125,7 @@ Result of the above filter command is array of items. Two items contain the stri
 
 vsscrollbarEvent.filter($scope, 'e');
 ```
-Result of the above filter command is array of objects. Two objects contain the string **e**.
+Result of the above filter command is two objects, because two objects contain the string **e**.
 
 
 In the **examples** folder of this project has the sample app and the online demo 
