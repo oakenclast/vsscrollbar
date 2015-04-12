@@ -218,21 +218,17 @@ angular.module('vsscrollbar', [])
                 };
 
                 function setScrollPos(pos) {
-                    if (pos !== position) {
+                    if ((pos = Math.round(pos)) !== position) {
                         position = pos;
-                        var idx = vsscrollbarService.calcIndex(position, maxIdx, maxPos);
-                        if (idx !== index) {
-                            index = idx;
-                            moveScrollBox();
-                        }
+                        index = vsscrollbarService.calcIndex(position, maxIdx, maxPos);
+                        moveScrollBox();
                     }
                 };
 
                 function setIndex(idx, verifyChange) {
-                    idx = vsscrollbarService.validateIndex(idx, maxIdx);
-                    if (idx !== index || !verifyChange) {
-                        position = vsscrollbarService.calcScrollPos(idx, maxIdx, maxPos);
+                    if ((idx = vsscrollbarService.validateIndex(idx, maxIdx)) !== index || !verifyChange) {
                         index = idx;
+                        position = vsscrollbarService.calcScrollPos(index, maxIdx, maxPos);
                         moveScrollBox();
                     }
                 };
