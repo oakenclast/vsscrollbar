@@ -93,13 +93,10 @@ module.exports = function (grunt) {
 
         clean: {
             all: {
-                src: ['build', 'dist', 'coverage']
+                src: ['build', 'coverage']
             },
             build: {
                 src: ['build']
-            },
-            dist: {
-                src: ['dist']
             },
             coverage: {
                 src: ['coverage']
