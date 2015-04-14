@@ -69,27 +69,40 @@ module.exports = function (grunt) {
         },
 
         copy: {
-            main: {
+            dest_min: {
                 files: [{
                     src: 'build/<%= pkg.name %>.min.css',
                     dest: 'dist/min/<%= pkg.name %>-<%= pkg.version %>.min.css'
-                },
-                {
+                }]
+            },
+            dest_debug: {
+                files: [{
                     src: 'css/<%= pkg.name %>.css',
                     dest: 'dist/debug/<%= pkg.name %>-<%= pkg.version %>.css'
                 }]
             }
         },
 
+        karma: {
+            unit: {
+                configFile: 'karma.conf.js',
+                background: false,
+                browsers: ['Firefox']
+            }
+        },
+
         clean: {
             all: {
-                src: ['build', 'dist']
+                src: ['build', 'dist', 'coverage']
             },
             build: {
                 src: ['build']
             },
             dist: {
                 src: ['dist']
+            },
+            coverage: {
+                src: ['coverage']
             }
         }
 
@@ -101,6 +114,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['clean:all', 'html2js', 'uglify', 'concat', 'cssmin', 'copy', 'clean:build']);
+    grunt.registerTask('test', ['clean:all', 'html2js', 'uglify', 'concat', 'cssmin', 'copy', 'karma', 'clean:build']);
 };
