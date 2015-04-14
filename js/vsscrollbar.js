@@ -1,9 +1,3 @@
-/*
- * Virtual scroll with custom scrollbar - AngularJS UI component
- * Version: 0.1
- * Author: kekeh
- * License: MIT
- */
 angular.module('vsscrollbar', [])
     .constant('vsscrollbarConfig', {
         ITEMS_IN_PAGE: 6,

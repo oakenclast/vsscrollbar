@@ -18,29 +18,41 @@ module.exports = function (grunt) {
         },
 
         uglify: {
-            options: {
-                banner: '/*! Javascript: <%= pkg.name %> - <%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
-            build: {
-                src: 'js/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
+            dist: {
+                files: {
+                    'build/<%= pkg.name %>.min.js': ['js/<%= pkg.name %>.js']
+                }
             }
         },
 
         concat: {
             options: {
-                banner: '/*! HTML-template: <%= pkg.name %> - <%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+                banner:
+                    '/* \n' +
+                    '*  Name: <%= grunt.config.get("pkg.name") %> \n' +
+                    '*  Description: <%= grunt.config.get("pkg.description") %> \n' +
+                    '*  Version: <%= grunt.config.get("pkg.version") %> \n' +
+                    '*  Author: <%= grunt.config.get("pkg.author") %> \n' +
+                    '*  License: <%= grunt.config.get("pkg.license") %> \n' +
+                    '*  Date: <%= grunt.template.today("yyyy-mm-dd") %> \n' +
+                    '*/ \n',
                 process: function (src, filepath) {
-                    if (filepath === 'build/' + grunt.config.get('pkg.name') + '.min.js') {
+                    if (filepath === 'build/' + grunt.config.get('pkg.name') + '.min.js' || filepath === 'js/' + grunt.config.get('pkg.name') + '.js') {
                         var newStr = 'template-' + grunt.config.get('pkg.name') + '-' + grunt.config.get('pkg.version') + '.html';
-                        return src.replace('angular.module("vsscrollbar",[])', 'angular.module("vsscrollbar",["' + newStr + '"])');
+                        return src.replace('[]', '["' + newStr + '"]');
                     }
                     return src;
                 }
             },
-            dist: {
-                src: ['build/**/*.html.js', 'build/**/*.min.js'],
-                dest: 'dist/min/<%= pkg.name %>-<%= pkg.version %>.min.js'
+            dist_min: {
+                files: {
+                    'dist/min/<%= pkg.name %>-<%= pkg.version %>.min.js': ['build/**/*.html.js', 'build/**/*.min.js']
+                }
+            },
+            dist_debug: {
+                files: {
+                    'dist/debug/<%= pkg.name %>-<%= pkg.version %>.js': ['build/**/*.html.js', 'js/**/*.js']
+                }
             }
         },
 
@@ -58,30 +70,13 @@ module.exports = function (grunt) {
 
         copy: {
             main: {
-                options: {
-                    process: function (src, filepath) {
-                        if (filepath === 'js/' + grunt.config.get('pkg.name') + '.js') {
-                            return src.replace('templates/' + grunt.config.get('pkg.name') + '.html',
-                                'templates/' + grunt.config.get('pkg.name') + '-' + grunt.config.get('pkg.version') + '.html');
-                        }
-                        return src;
-                    }
-                },
                 files: [{
                     src: 'build/<%= pkg.name %>.min.css',
                     dest: 'dist/min/<%= pkg.name %>-<%= pkg.version %>.min.css'
                 },
                 {
                     src: 'css/<%= pkg.name %>.css',
-                    dest: 'dist/debug/css/<%= pkg.name %>-<%= pkg.version %>.css'
-                },
-                {
-                    src: 'js/<%= pkg.name %>.js',
-                    dest: 'dist/debug/js/<%= pkg.name %>-<%= pkg.version %>.js'
-                },
-                {
-                    src: 'templates/<%= pkg.name %>.html',
-                    dest: 'dist/debug/templates/<%= pkg.name %>-<%= pkg.version %>.html'
+                    dest: 'dist/debug/<%= pkg.name %>-<%= pkg.version %>.css'
                 }]
             }
         },

@@ -129,7 +129,7 @@ Result of the above filter command is two objects, because two objects contain t
 
 
 In the **examples** folder of this project has the sample app and the online demo 
-is [here](http://embed.plnkr.co/H90QoIRISKqp99vOe8Rn/preview)
+is [here](http://embed.plnkr.co/dOng41/preview)
 
 ## Dependencies
 Depends on AngularJS. Implemented using the AngularJS version 1.3.10.

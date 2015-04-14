@@ -1,6 +1,6 @@
 {
   "author": "kekeh",
-  "description": "Virtual scroll with custom scrollbar - AngularJS UI component",
+  "description": "Virtual scroll with filtering and custom scrollbar - AngularJS UI component",
   "name": "vsscrollbar",
   "version": "0.1.0",
   "license" : "MIT",
