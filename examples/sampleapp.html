@@ -34,38 +34,7 @@
             <hr/>
 
             <div>
-                <h5>Callback data from the directive</h5>
-                <table id="callbacktbl">
-                    <tr>
-                        <td>Top index</td>
-                        <td>{{topIndex}}</td>		
-                    </tr>
-                    <tr>
-                        <td>Max top index</td>
-                        <td>{{maxIndex}}</td>		
-                    </tr>
-                    <tr>
-                        <td>Top scroll pos</td>
-                        <td>{{topPos}}</td>		
-                    </tr>
-                    <tr>
-                        <td>Max scroll pos</td>
-                        <td>{{maxPos}}</td>		
-                    </tr>
-                    <tr>
-                        <td>Filtered page count</td>
-                        <td>{{filteredPageCount}}</td>
-                    </tr>
-                    <tr>
-                        <td>Filtered item count</td>
-                        <td>{{filteredItemCount}}</td>
-                    </tr>
-                    <tr>
-                        <td>Visible items</td>
-                        <td>{{visibleItems}}</td>		
-                    </tr> 
-                </table>
-                
+                <div ng-include="'response.html'"></div>
                 <hr/>
                 <div id="clickedtext">{{clickedText}}</div>
             </div>
@@ -99,41 +68,45 @@
             <hr/>
 
             <div>
-                <h5>Callback data from the directive</h5>
-                <table id="callbacktbl">
-                    <tr>
-                        <td>Top index</td>
-                        <td>{{topIndex}}</td>
-                    </tr>
-                    <tr>
-                        <td>Max top index</td>
-                        <td>{{maxIndex}}</td>
-                    </tr>
-                    <tr>
-                        <td>Top scroll pos</td>
-                        <td>{{topPos}}</td>
-                    </tr>
-                    <tr>
-                        <td>Max scroll pos</td>
-                        <td>{{maxPos}}</td>
-                    </tr>
-                    <tr>
-                        <td>Filtered page count</td>
-                        <td>{{filteredPageCount}}</td>
-                    </tr>
-                    <tr>
-                        <td>Filtered item count</td>
-                        <td>{{filteredItemCount}}</td>
-                    </tr>
-                    <tr>
-                        <td>Visible items</td>
-                        <td>{{visibleItems}}</td>
-                    </tr>
-                </table>
-
+                <div ng-include="'response.html'"></div>
                 <hr/>
                 <div id="clickedtext">{{clickedText}}</div>
             </div>
         </div>
     </body>
+
+    <script type="text/ng-template" id="response.html">
+        <h5>Callback data from the directive</h5>
+        <table id="callbacktbl">
+            <tr>
+                <td>Top index</td>
+                <td>{{topIndex}}</td>
+            </tr>
+            <tr>
+                <td>Max top index</td>
+                <td>{{maxIndex}}</td>
+            </tr>
+            <tr>
+                <td>Top scroll pos</td>
+                <td>{{topPos}}</td>
+            </tr>
+            <tr>
+                <td>Max scroll pos</td>
+                <td>{{maxPos}}</td>
+            </tr>
+            <tr>
+                <td>Filtered page count</td>
+                <td>{{filteredPageCount}}</td>
+            </tr>
+            <tr>
+                <td>Filtered item count</td>
+                <td>{{filteredItemCount}}</td>
+            </tr>
+            <tr>
+                <td>Visible items</td>
+                <td>{{visibleItems}}</td>
+            </tr>
+        </table>
+    </script>
+
 </html>
