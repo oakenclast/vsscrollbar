@@ -1,0 +1,42 @@
+#item {
+    border: 1px solid #BCE8F1;
+    height: 25px;
+    margin-bottom: 1px;
+    border-radius: 2px;
+    background-color: #FAFAFA;
+    color: #3A87AD;
+    font-size: 0.8em;
+    padding-left: 2px;
+    cursor: pointer;
+}
+
+#item:last-child {
+    margin-bottom: 0px;
+}
+
+#item:hover {
+    background-color: lightgreen;
+    color: darkblue;
+}
+
+#itemtext {
+    line-height:25px;
+}
+
+#col {
+    display: inline-block;
+    width: 33.3%;
+}
+
+#filter input {
+    width: 100%;
+    min-width: 150px;
+    border: 1px solid #CCC;
+    border-radius: 2px;
+    padding: 2px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
