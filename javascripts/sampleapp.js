@@ -3,7 +3,6 @@ sampleapp.controller('vsScrollbarCtrl', function ($scope, vsscrollbarEvent) {
 
     $scope.visibleItems = [];
     $scope.filterText = '';
-    $scope.showObject = 1;
 
     $scope.topIndex = 0;
     $scope.maxIndex = 0;
