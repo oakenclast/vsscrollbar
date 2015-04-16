@@ -4,7 +4,7 @@
 *  Version: 0.1.0 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-04-14 
+*  Date: 2015-04-16 
 */ 
 angular.module('template-vsscrollbar-0.1.0.html', ['templates/vsscrollbar.html']);
 
@@ -12,10 +12,10 @@ angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function
   $templateCache.put("templates/vsscrollbar.html",
     "<table class=\"vsscrollbarcontainer\" style=\"border-collapse: separate; border-spacing: 0; padding: 0; height: 100%;\">\n" +
     "    <tr>\n" +
-    "        <td style=\"width: 100%; padding: 0;\">\n" +
+    "        <td style=\"width: 100%; padding: 0; vertical-align: top;\">\n" +
     "            <div class=\"vsscrollbarcontent\" style=\"margin: 1px; overflow-y: hidden; padding: 0; outline: 0;\" ng-transclude></div>\n" +
     "        </td>\n" +
-    "        <td style=\"padding: 1px 0px 1px 0px; height: 100%;\">\n" +
+    "        <td style=\"padding: 0; height: 100%;\">\n" +
     "            <div class=\"vsscrollbar\" ng-show=\"scrollbarVisible\" style=\"float: right; height: 100%; padding: 0; margin: 1px 1px 1px 0px;\">\n" +
     "                <div class=\"vsscrollbox\" tabindex=\"0\" ng-style=\"{'height': boxHeight + 'px'}\"\n" +
     "                     ng-click=\"$event.stopPropagation();\" style=\"position: relative; padding: 0; outline: 0;\"></div>\n" +

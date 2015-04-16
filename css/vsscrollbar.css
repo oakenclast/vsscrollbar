@@ -3,6 +3,7 @@
     min-width: 150px;
     width: 100%;
     border: 1px solid #CCC;
+    background-color: #FFF;
     border-radius: 2px;
 }
 
@@ -28,7 +29,7 @@
 
 .vsscrollbarcontainer .vsscrollbox:hover,
 .vsscrollbarcontainer .vsscrollbox:focus {
-    background-color: #ADD8E6
+    background-color: #ADD8E6;
 }
 
 .vsscrollbarcontainer .vsscrollbar,
