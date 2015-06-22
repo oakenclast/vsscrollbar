@@ -1,12 +1,12 @@
 /* 
 *  Name: vsscrollbar 
 *  Description: Virtual scroll with filtering and custom scrollbar - AngularJS UI component 
-*  Version: 0.1.0 
+*  Version: 0.1.1 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-04-16 
+*  Date: 2015-06-22 
 */ 
-angular.module('template-vsscrollbar-0.1.0.html', ['templates/vsscrollbar.html']);
+angular.module('template-vsscrollbar-0.1.1.html', ['templates/vsscrollbar.html']);
 
 angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
@@ -26,7 +26,7 @@ angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function
     "");
 }]);
 
-angular.module('vsscrollbar', ["template-vsscrollbar-0.1.0.html"])
+angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
     .constant('vsscrollbarConfig', {
         ITEMS_IN_PAGE: 6,
         SCROLLBAR_HEIGHT: 0,
