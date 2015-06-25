@@ -1,126 +1,106 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description"
-          content="vsscrollbar : Virtual scroll with filtering and custom scrollbar - AngularJS UI component">
+    <meta name="viewport" content="width=640">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.js"></script>
-    <link href="stylesheets/vsscrollbar-0.1.0.css" rel="stylesheet" type="text/css">
-    <script src="javascripts/vsscrollbar-0.1.0.js"></script>
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>vsscrollbar by kekeh</title>
+  </head>
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/sampleapp.css">
-    <script src="javascripts/sampleapp.js"></script>
+  <body>
+    <a id="forkme_banner" href="https://github.com/kekeh/vsscrollbar">View on GitHub</a>
+    <div class="shell">
 
-    <title>vsscrollbar</title>
-</head>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>vsscrollbar</h1>
+            <h2>Virtual scroll with filtering and custom scrollbar - AngularJS UI component</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-<body ng-app="vssampleapp">
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/kekeh/vsscrollbar/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/kekeh/vsscrollbar/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-<!-- HEADER -->
-<div id="header_wrap" class="outer">
-    <header class="inner">
-        <a id="forkme_banner" href="https://github.com/kekeh/vsscrollbar">View on GitHub</a>
 
-        <h1 id="project_title">vsscrollbar</h1>
+      <span class="banner-fix"></span>
 
-        <h2 id="project_tagline">Virtual scroll with filtering and custom scrollbar - AngularJS UI component</h2>
 
-        <section id="downloads">
-            <a class="zip_download_link" href="https://github.com/kekeh/vsscrollbar/zipball/master">Download this
-                project as a .zip file</a>
-            <a class="tar_download_link" href="https://github.com/kekeh/vsscrollbar/tarball/master">Download this
-                project as a tar.gz file</a>
-        </section>
-    </header>
-</div>
-
-<!-- MAIN CONTENT -->
-<div id="main_content_wrap" class="outer">
-    <section id="main_content" class="inner" ng-controller="vsScrollbarCtrl">
+      <section id="main_content">
         <h1>
-            <a id="vsscrollbar" class="anchor" href="#vsscrollbar" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>vsscrollbar</h1>
+<a id="vsscrollbar" class="anchor" href="#vsscrollbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>vsscrollbar</h1>
 
-        <p><strong>Virtual scroll with filtering and custom scrollbar - AngularJS UI component</strong></p>
+<p><strong>Virtual scroll with filtering and custom scrollbar - AngularJS UI component</strong></p>
 
-        <h2>
-            <a id="description" class="anchor" href="#description" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>Description</h2>
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h2>
 
-        <p>AngularJS directive which implements the virtual scroll, filtering of the items and the customizable
-            scrollbar</p>
+<p>AngularJS directive which implements the virtual scroll, filtering of the items and the customizable scrollbar</p>
 
-        <h3>
-            <a id="1-virtual-scroll" class="anchor" href="#1-virtual-scroll" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>1. virtual scroll</h3>
+<h3>
+<a id="1-virtual-scroll" class="anchor" href="#1-virtual-scroll" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. virtual scroll</h3>
 
-        <ul>
-            <li>good performance even millions of the items in the list</li>
-            <li>only visible items are rendered in the browser</li>
-        </ul>
+<ul>
+<li>good performance even millions of the items in the list</li>
+<li>only visible items are rendered in the browser</li>
+</ul>
 
-        <h3>
-            <a id="2-filtering" class="anchor" href="#2-filtering" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>2. filtering</h3>
+<h3>
+<a id="2-filtering" class="anchor" href="#2-filtering" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. filtering</h3>
 
-        <ul>
-            <li>if scrollbar items are array of strings - filtering by string value</li>
-            <li>if scrollbar items are array of objects - filtering by string from all properties of the object</li>
-        </ul>
+<ul>
+<li>if scrollbar items are array of strings - filtering by string value</li>
+<li>if scrollbar items are array of objects - filtering by string from all properties of the object</li>
+</ul>
 
-        <h3>
-            <a id="3-customizable-scrollbar" class="anchor" href="#3-customizable-scrollbar" aria-hidden="true"><span
-                    class="octicon octicon-link"></span></a>3. customizable scrollbar</h3>
+<h3>
+<a id="3-customizable-scrollbar" class="anchor" href="#3-customizable-scrollbar" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. customizable scrollbar</h3>
 
-        <ul>
-            <li>custom scrollbar is used instead of native scrollbar of the browser</li>
-            <li>scrollbar can be easily customised using the CSS</li>
-            <li>scrollbar is looking similar in all browsers</li>
-        </ul>
+<ul>
+<li>custom scrollbar is used instead of native scrollbar of the browser</li>
+<li>scrollbar can be easily customised using the CSS</li>
+<li>scrollbar is looking similar in all browsers</li>
+</ul>
 
-        <h2>
-            <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demos
-        </h2>
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
 
-        <p>The example list below contain 100 000 items. Items are JSON objects for example: <mark>{id: 1, code: 'VT', name: 'Item #2'}</mark>. The scrollbar is customized <a href="stylesheets/vsscrollbar-0.1.0.css">here</a>.</p>
+<p>Another demo is <a href="http://embed.plnkr.co/dOng41/preview">here</a></p>
+      </section>
 
-        <table id="filtergroup">
-            <tr>
-                <td>
-                    <input id="filterinput" type="text" placeholder="Type filter and wait one second..." ng-model="filterText" ng-model-options="{ debounce: 1000 }">
-                </td>
-                <td id="filtermatch">
-                    <div>Item count: {{filteredItemCount}}</div>
-                </td>
-            </tr>
-        </table>
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/kekeh">kekeh</a> can be found on <a href="https://github.com/kekeh/vsscrollbar">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
 
-        <vsscrollbar items="allItems" items-in-page="5" on-scroll-change-fn="onScrollChange(topIndex, maxIndex, topPos, maxPos, filteredPageCount, filteredItemCount, visibleItems)">
-            <div id="item" ng-repeat="item in visibleItems track by $index">
-                <div id="itemtext">
-                    <div id="col">{{item.id}}</div><div id="col">{{item.code}}</div><div id="col">{{item.name}}</div>
-                </div>
-            </div>
-        </vsscrollbar>
+    </div>
 
-        <p><a href="http://embed.plnkr.co/dOng41/preview">Here</a> are more demos.</p>
-
-    </section>
-</div>
-
-<!-- FOOTER  -->
-<div id="footer_wrap" class="outer">
-    <footer class="inner">
-        <p class="copyright">vsscrollbar maintained by <a href="https://github.com/kekeh">kekeh</a></p>
-
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-    </footer>
-</div>
-
-</body>
+    
+  </body>
 </html>
