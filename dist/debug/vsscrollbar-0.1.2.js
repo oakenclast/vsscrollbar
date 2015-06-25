@@ -1,24 +1,24 @@
 /* 
 *  Name: vsscrollbar 
-*  Description: Virtual scroll with filtering and custom scrollbar - AngularJS UI component 
-*  Version: 0.1.1 
+*  Description: Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component 
+*  Homepage: http://kekeh.github.io/vsscrollbar 
+*  Version: 0.1.2 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-06-22 
+*  Date: 2015-06-25 
 */ 
-angular.module('template-vsscrollbar-0.1.1.html', ['templates/vsscrollbar.html']);
+angular.module('template-vsscrollbar-0.1.2.html', ['templates/vsscrollbar.html']);
 
 angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
-    "<table class=\"vsscrollbarcontainer\" style=\"border-collapse: separate; border-spacing: 0; padding: 0; height: 100%;\">\n" +
+    "<table class=\"vsscrollbarcontainer\" ng-show=\"filteredItems.length > 0\" style=\"border-collapse:separate; border-spacing:0; padding:0; height:100%;\">\n" +
     "    <tr>\n" +
-    "        <td style=\"width: 100%; padding: 0; vertical-align: top;\">\n" +
-    "            <div class=\"vsscrollbarcontent\" style=\"margin: 1px; overflow-y: hidden; padding: 0; outline: 0;\" ng-transclude></div>\n" +
+    "        <td style=\"width:100%; padding:0; vertical-align: top;\">\n" +
+    "            <div class=\"vsscrollbarcontent\" ng-style=\"{'margin': scrollbarVisible ? '1px 0 1px 1px' : '1px'}\" style=\"overflow-y:hidden; padding:0; outline:0;\" ng-transclude></div>\n" +
     "        </td>\n" +
-    "        <td style=\"padding: 0; height: 100%;\">\n" +
-    "            <div class=\"vsscrollbar\" ng-show=\"scrollbarVisible\" style=\"float: right; height: 100%; padding: 0; margin: 1px 1px 1px 0px;\">\n" +
-    "                <div class=\"vsscrollbox\" tabindex=\"0\" ng-style=\"{'height': boxHeight + 'px'}\"\n" +
-    "                     ng-click=\"$event.stopPropagation();\" style=\"position: relative; padding: 0; outline: 0;\"></div>\n" +
+    "        <td style=\"padding:0; height:100%;\">\n" +
+    "            <div class=\"vsscrollbar\" ng-show=\"scrollbarVisible\" style=\"float: right; height:100%; padding:0; margin:1px;\">\n" +
+    "                <div class=\"vsscrollbox\" tabindex=\"0\" ng-style=\"{'height': boxHeight + 'px'}\" ng-click=\"$event.stopPropagation();\" style=\"position:relative; padding:0; outline:0;\"></div>\n" +
     "            </div>\n" +
     "        </td>\n" +
     "    </tr>\n" +
@@ -26,7 +26,7 @@ angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function
     "");
 }]);
 
-angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
+angular.module('vsscrollbar', ["template-vsscrollbar-0.1.2.html"])
     .constant('vsscrollbarConfig', {
         ITEMS_IN_PAGE: 6,
         SCROLLBAR_HEIGHT: 0,
@@ -35,7 +35,7 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
     .factory('vsscrollbarEvent', function () {
         var factory = {};
         factory.setIndex = function ($scope, index) {
-            broadcast($scope, 'setIndex', index)
+            broadcast($scope, 'setIndex', index);
         };
 
         factory.setPosition = function ($scope, position) {
@@ -118,13 +118,13 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
             transclude: true,
             templateUrl: 'templates/vsscrollbar.html',
             link: function (scope, element, attrs) {
+                scope.filteredItems = [];
                 var scrollbarContent = angular.element(element[0].querySelector('.vsscrollbarcontent'));
                 var scrollbar = angular.element(element[0].querySelector('.vsscrollbar'));
                 var scrollbox = scrollbar.children();
                 var itemsInPage = !angular.isUndefined(attrs.itemsInPage) ? scope.$eval(attrs.itemsInPage) : vsscrollbarConfig.ITEMS_IN_PAGE;
                 var scrollbarHeight = !angular.isUndefined(attrs.height) ? scope.$eval(attrs.height) : vsscrollbarConfig.SCROLLBAR_HEIGHT;
                 var scrollStart = 0, index = 0, maxIdx = 0, position = 0, maxPos = 0;
-                var filteredItems = [];
                 var filterStr = '';
 
                 scope.boxHeight = vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT;
@@ -171,15 +171,19 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                     $document.off('touchend', onTouchEndList);
                 };
 
-                scrollbar.on('click', function (event) {
+                scrollbar.on('click', onScrollbarClick);
+
+                function onScrollbarClick(event) {
                     var value = event.offsetY || event.layerY;
                     setScrollPos(vsscrollbarService.validatePos(value < scope.boxHeight ? 0 : value, maxPos));
                     scope.$apply();
-                });
+                }
 
-                scrollbox.on('click', function () {
+                scrollbox.on('click', onScrollboxClick);
+
+                function onScrollboxClick() {
                     scrollbox[0].focus();
-                });
+                }
 
                 scrollbarContent.on('mousewheel DOMMouseScroll', onScrollMouseWheel);
                 scrollbar.on('mousewheel DOMMouseScroll', onScrollMouseWheel);
@@ -190,17 +194,18 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                     indexChange(isDown ? itemsInPage : -itemsInPage);
                 };
 
-                scrollbox.on('keydown', function (event) {
-                    event.preventDefault();
-                    if (event.which === 38) {
-                        indexChange(-itemsInPage);
-                    }
-                    else if (event.which === 40) {
-                        indexChange(itemsInPage);
-                    }
-                });
+                scrollbox.on('keydown', onKeydown);
 
-                scope.$on('vsmessage', function (event, data) {
+                function onKeydown(event) {
+                    if (event.which === 38 || event.which === 40) {
+                        event.preventDefault();
+                        indexChange(event.which === 38 ? -itemsInPage : itemsInPage);
+                    }
+                }
+
+                scope.$on('vsmessage', onScrollbarMessage);
+
+                function onScrollbarMessage(event, data) {
                     if (data.type === 'setIndex' && data.value !== index && data.value >= 0) {
                         setIndex(Math.round(data.value), true);
                     }
@@ -223,21 +228,32 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                         scope.items.splice(data.value, 1);
                         filterItems(filterStr, index);
                     }
+                }
+
+                scope.$on('$destroy', function () {
+                    scrollbox.off('mousedown touchstart', onScrollMoveStart);
+                    scrollbarContent.off('touchstart', onTouchStartList);
+                    scrollbar.off('click', onScrollbarClick);
+                    scrollbox.off('click', onScrollboxClick);
+                    scrollbarContent.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
+                    scrollbar.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
+                    scrollbox.off('keydown', onKeydown);
+                    scope.$off('vsmessage', onScrollbarMessage);
                 });
 
                 function filterItems(filter, idx) {
-                    filteredItems = (filter === '') ? scope.items : $filter('filter')(scope.items, filter);
-                    scope.scrollbarVisible = filteredItems.length > itemsInPage;
+                    scope.filteredItems = (filter === '') ? scope.items : $filter('filter')(scope.items, filter);
+                    scope.scrollbarVisible = scope.filteredItems.length > itemsInPage;
                     initScrollValues();
                     setIndex(idx, false);
-                };
+                }
 
                 function initScrollValues() {
-                    var height = Math.floor(scrollbarHeight / (filteredItems.length / itemsInPage));
+                    var height = Math.floor(scrollbarHeight / (scope.filteredItems.length / itemsInPage));
                     scope.boxHeight = height < vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT ? vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT : height;
-                    maxIdx = filteredItems.length - itemsInPage < 0 ? 0 : filteredItems.length - itemsInPage;
+                    maxIdx = scope.filteredItems.length - itemsInPage < 0 ? 0 : scope.filteredItems.length - itemsInPage;
                     maxPos = scrollbarHeight - scope.boxHeight < 0 ? 0 : scrollbarHeight - scope.boxHeight;
-                };
+                }
 
                 function setScrollPos(pos) {
                     if ((pos = Math.round(pos)) !== position) {
@@ -245,7 +261,7 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                         index = vsscrollbarService.calcIndex(position, maxIdx, maxPos);
                         moveScrollBox();
                     }
-                };
+                }
 
                 function setIndex(idx, verifyChange) {
                     if ((idx = vsscrollbarService.validateIndex(idx, maxIdx)) !== index || !verifyChange) {
@@ -253,17 +269,17 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                         position = vsscrollbarService.calcScrollPos(index, maxIdx, maxPos);
                         moveScrollBox();
                     }
-                };
+                }
 
                 function indexChange(idx) {
                     setIndex(index + idx, true);
                     scope.$apply();
-                };
+                }
 
                 function moveScrollBox() {
                     scrollbox.css('top', position + 'px');
                     onScrollChange();
-                };
+                }
 
                 function onScrollChange() {
                     var responseData = {
@@ -271,20 +287,20 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                         maxIndex: maxIdx,
                         topPos: position,
                         maxPos: maxPos,
-                        filteredPageCount: filteredItems.length / itemsInPage,
-                        filteredItemCount: filteredItems.length,
+                        filteredPageCount: scope.filteredItems.length / itemsInPage,
+                        filteredItemCount: scope.filteredItems.length,
                         visibleItems: slice()
                     };
                     scope.onScrollChangeFn(responseData);
                     scope.ngModel = responseData;
-                };
+                }
 
                 function slice() {
-                    return filteredItems.slice(index, index + itemsInPage);
-                };
+                    return scope.filteredItems.slice(index, index + itemsInPage);
+                }
 
                 function init() {
-                    filteredItems = scope.items;
+                    scope.filteredItems = scope.items;
                     if (scrollbarHeight === 0) {
                         $timeout(setHeight, 0);
                     }
@@ -293,13 +309,13 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.1.html"])
                         initScrollValues();
                     }
                     setIndex(0, false);
-                };
+                }
 
                 function setHeight() {
                     scrollbarHeight = scrollbarContent.prop('offsetHeight');
                     scrollbar.css('height', scrollbarHeight + 'px');
                     initScrollValues();
-                };
+                }
 
                 init();
             }
