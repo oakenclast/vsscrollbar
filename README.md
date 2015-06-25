@@ -1,4 +1,4 @@
-# vsscrollbar v. 0.1.1
+# vsscrollbar v. 0.1.2
 **Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component**
 
 ## Description
@@ -19,10 +19,10 @@ AngularJS directive which implements the virtual scroll, filtering of the items 
 
 ## Usage
 
-* include the **vsscrollbar-0.1.1.min.js** and the **vsscrollbar-0.1.1.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **vsscrollbar-0.1.2.min.js** and the **vsscrollbar-0.1.2.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="vsscrollbar-0.1.1.min.js"></script>
-<link href="vsscrollbar-0.1.1.min.css" rel="stylesheet" type="text/css">
+<script src="vsscrollbar-0.1.2.min.js"></script>
+<link href="vsscrollbar-0.1.2.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **vsscrollbar** module into your application module.
 ```js
