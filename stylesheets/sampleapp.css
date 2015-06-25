@@ -8,6 +8,7 @@
     font-size: 0.8em;
     padding-left: 2px;
     cursor: pointer;
+    text-align: left;
 }
 
 #item:last-child {
@@ -25,7 +26,7 @@
 
 #col {
     display: inline-block;
-    width: 33.3%;
+    width: 32%;
 }
 
 #filtergroup {
@@ -37,9 +38,17 @@
     border-collapse: separate;
 }
 
+#filtergroup tr {
+    background-color: #f3faff;
+}
+
+#filtergroup td {
+    border: none;
+}
+
 #filterinput {
     border: none;
-    background-color: transparent;
+    background-color: inherit;
     padding-left: 8px;
     height: 28px;
     width: 100%;
@@ -63,8 +72,4 @@
     color: #AAA;
     text-align: right;
     vertical-align: middle;
-}
-
-mark {
-    background-color: #EDED00;
 }
