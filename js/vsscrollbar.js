@@ -210,7 +210,6 @@ angular.module('vsscrollbar', [])
                     scrollbarContent.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
                     scrollbar.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
                     scrollbox.off('keydown', onKeydown);
-                    scope.$off('vsmessage', onScrollbarMessage);
                 });
 
                 function filterItems(filter, idx) {

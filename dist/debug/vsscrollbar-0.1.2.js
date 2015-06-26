@@ -5,7 +5,7 @@
 *  Version: 0.1.2 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-06-25 
+*  Date: 2015-06-26 
 */ 
 angular.module('template-vsscrollbar-0.1.2.html', ['templates/vsscrollbar.html']);
 
@@ -238,7 +238,6 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.2.html"])
                     scrollbarContent.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
                     scrollbar.off('mousewheel DOMMouseScroll', onScrollMouseWheel);
                     scrollbox.off('keydown', onKeydown);
-                    scope.$off('vsmessage', onScrollbarMessage);
                 });
 
                 function filterItems(filter, idx) {
