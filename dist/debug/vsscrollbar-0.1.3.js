@@ -2,23 +2,28 @@
 *  Name: vsscrollbar 
 *  Description: Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component 
 *  Homepage: http://kekeh.github.io/vsscrollbar 
-*  Version: 0.1.2 
+*  Version: 0.1.3 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-06-26 
+*  Date: 2015-07-16 
 */ 
-angular.module('template-vsscrollbar-0.1.2.html', ['templates/vsscrollbar.html']);
+angular.module('template-vsscrollbar-0.1.3.html', ['templates/vsscrollbar.html']);
 
 angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
-    "<table class=\"vsscrollbarcontainer\" ng-show=\"filteredItems.length > 0\" style=\"border-collapse:separate; border-spacing:0; padding:0; height:100%;\">\n" +
+    "<table class=\"vsscrollbarcontainer\" ng-show=\"filteredItems.length > 0\"\n" +
+    "       style=\"border-collapse:separate; border-spacing:0; padding:0; height:100%;\">\n" +
     "    <tr>\n" +
     "        <td style=\"width:100%; padding:0; vertical-align: top;\">\n" +
-    "            <div class=\"vsscrollbarcontent\" ng-style=\"{'margin': scrollbarVisible ? '1px 0 1px 1px' : '1px'}\" style=\"overflow-y:hidden; padding:0; outline:0;\" ng-transclude></div>\n" +
+    "            <div class=\"vsscrollbarcontent\" ng-style=\"{'margin': scrollbarVisible ? '1px 0 1px 1px' : '1px'}\"\n" +
+    "                 style=\"overflow-y:hidden; padding:0; outline:0;\" ng-transclude></div>\n" +
     "        </td>\n" +
     "        <td style=\"padding:0; height:100%;\">\n" +
-    "            <div class=\"vsscrollbar\" ng-show=\"scrollbarVisible\" style=\"float: right; height:100%; padding:0; margin:1px;\">\n" +
-    "                <div class=\"vsscrollbox\" tabindex=\"0\" ng-style=\"{'height': boxHeight + 'px'}\" ng-click=\"$event.stopPropagation();\" style=\"position:relative; padding:0; outline:0;\"></div>\n" +
+    "            <div class=\"vsscrollbar\" ng-show=\"scrollbarVisible\"\n" +
+    "                 style=\"float:right; height:100%; padding:0; margin:1px;\">\n" +
+    "                <div class=\"vsscrollbox\" tabindex=\"0\" ng-focus=\"scrollBoxFocus()\" ng-blur=\"scrollBoxBlur()\"\n" +
+    "                     ng-style=\"{'height': boxHeight + 'px'}\"\n" +
+    "                     ng-click=\"$event.stopPropagation();\" style=\"position:relative; padding:0; outline:0;\"></div>\n" +
     "            </div>\n" +
     "        </td>\n" +
     "    </tr>\n" +
@@ -26,7 +31,7 @@ angular.module("templates/vsscrollbar.html", []).run(["$templateCache", function
     "");
 }]);
 
-angular.module('vsscrollbar', ["template-vsscrollbar-0.1.2.html"])
+angular.module('vsscrollbar', ["template-vsscrollbar-0.1.3.html"])
     .constant('vsscrollbarConfig', {
         ITEMS_IN_PAGE: 6,
         SCROLLBAR_HEIGHT: 0,
@@ -113,7 +118,8 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.2.html"])
             scope: {
                 ngModel: '=?',
                 items: '=items',
-                onScrollChangeFn: '&'
+                onScrollChangeFn: '&',
+                onFocusScrollboxFn: '&'
             },
             transclude: true,
             templateUrl: 'templates/vsscrollbar.html',
@@ -129,6 +135,14 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.2.html"])
 
                 scope.boxHeight = vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT;
                 scope.scrollbarVisible = true;
+
+                scope.scrollBoxFocus = function () {
+                    scope.onFocusScrollboxFn({focused: true});
+                };
+
+                scope.scrollBoxBlur = function () {
+                    scope.onFocusScrollboxFn({focused: false});
+                };
 
                 scrollbox.on('mousedown touchstart', onScrollMoveStart);
 

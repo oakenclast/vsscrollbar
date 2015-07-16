@@ -1,4 +1,4 @@
-# vsscrollbar v. 0.1.2
+# vsscrollbar v. 0.1.3
 **Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component**
 
 ## Description
@@ -19,10 +19,10 @@ AngularJS directive which implements the virtual scroll, filtering of the items 
 
 ## Usage
 
-* include the **vsscrollbar-0.1.2.min.js** and the **vsscrollbar-0.1.2.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **vsscrollbar-0.1.3.min.js** and the **vsscrollbar-0.1.3.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="vsscrollbar-0.1.2.min.js"></script>
-<link href="vsscrollbar-0.1.2.min.css" rel="stylesheet" type="text/css">
+<script src="vsscrollbar-0.1.3.min.js"></script>
+<link href="vsscrollbar-0.1.3.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **vsscrollbar** module into your application module.
 ```js
@@ -35,7 +35,8 @@ angular.module('vssampleapp', ['vsscrollbar']);
 ```html
 <vsscrollbar items="allItems" items-in-page="5"
              on-scroll-change-fn="onScrollChange(topIndex, maxIndex, topPos, maxPos, 
-                                  filteredPageCount, filteredItemCount, visibleItems)">
+                                  filteredPageCount, filteredItemCount, visibleItems)"
+             on-focus-scrollbox-fn="onFocusScrollbox(focused)">
     <!- parent implements this part - begin -->                              
     <div id="item" ng-repeat="item in visibleItems track by $index" 
                    ng-click="itemClicked($index, item);">
@@ -61,6 +62,7 @@ It is also possible to use **ng-model="response"** instead of **on-scroll-change
 | items-in-page | visible item count in the vsscrollbar | yes |
 | height | height of the scrollbar | no |
 | on-scroll-change-fn | callback function which is called by the vsscrollbar when the scroll change occurs | yes if *ng-model* is not used |
+| on-focus-scrollbox-fn | callback function which is called by the vsscrollbar when the scrollbox get/lost focus | no |
 | ng-model | updated by the vsscrollbar when scroll change occurs | yes if *on-scroll-change-fn* is not used |
 
 
@@ -68,15 +70,21 @@ It is also possible to use **ng-model="response"** instead of **on-scroll-change
 ```js
 var sampleapp = angular.module('vssampleapp', ['vsscrollbar']);
 sampleapp.controller('vsScrollbarCtrl', function ($scope, vsscrollbarEvent, vsscrollbarConfig) {
-
-$scope.visibleItems = [];
-
-// Scroll change callback - **visibleItems** are shown in the scrollbar using the **ng-repeat**. See above.
-$scope.onScrollChange = function (topIndex, maxIndex, topPos, maxPos, 
-                                  filteredPageCount, filteredItemCount, visibleItems) {
-    ...
-    $scope.visibleItems = visibleItems;
+    $scope.visibleItems = [];
+    
+    // Scrollbox focus/blur callback - invoked when the scrollbox get/lost focus
+    $scope.onFocusScrollbox = function (focused) {
+        console.log('onFocusScrollbox(): focused: ', focused);
+    };
+    
+    // Scroll change callback - **visibleItems** are shown in the scrollbar using the **ng-repeat**. See above.
+    $scope.onScrollChange = function (topIndex, maxIndex, topPos, maxPos, 
+                                      filteredPageCount, filteredItemCount, visibleItems) {
+        $scope.visibleItems = visibleItems;
+        ...
+    };
 };
+
 ```
 
 By injecting the **vsscrollbarEvent** the parent can send events to the vsscrollbar component by calling service functions. 
@@ -132,7 +140,7 @@ In the **examples** folder of this project has the sample app and the online dem
 are [here](http://kekeh.github.io/vsscrollbar)
 
 ## Dependencies
-Depends on AngularJS. Implemented using the AngularJS version 1.3.10.
+Depends on AngularJS. Implemented using the AngularJS version 1.3.16.
 
 ## Build project
 * Build can be done by executing the **grunt** command. It creates the **dist/debug** and the **dist/min** folders and put files to these folders.
@@ -148,7 +156,7 @@ bower install vsscrollbar
 
 ## Compatibility (tested with)
 * IE 9+
-* Safari (Win) 5.1.7
+* Safari 5
 * Firefox 36.0.4
 * Google Chrome 41.0.2272.101
 * Opera 28.0

@@ -13,6 +13,11 @@ sampleapp.controller('vsScrollbarCtrl1', function ($scope, vsscrollbarEvent) {
     $scope.filteredPageCount = 0;
     $scope.filteredItemCount = 0;
 
+    // Scrollbox focus/blur callback
+    $scope.onFocusScrollbox = function (focused) {
+        console.log('onFocusScrollbox(): focused: ', focused);
+    };
+
     // Scroll change callback
     $scope.onScrollChange = function (topIndex, maxIndex, topPos, maxPos, filteredPageCount, filteredItemCount, visibleItems) {
         $scope.topIndex = topIndex;

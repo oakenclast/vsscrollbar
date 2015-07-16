@@ -114,5 +114,21 @@ describe('vsscrollbar', function() {
         expect(scope.filteredItemCount).toEqual(0);
         eventapi.filter(scope, '');
     });
+
+    it('vsscrollbarcontainer', function () {
+        expect(elm[0].querySelectorAll('.vsscrollbarcontainer').length).toBe(1);
+    });
+
+    it('vsscrollbarcontent', function () {
+        expect(elm[0].querySelectorAll('.vsscrollbarcontent').length).toBe(1);
+    });
+
+    it('vsscrollbar', function () {
+        expect(elm[0].querySelectorAll('.vsscrollbar').length).toBe(1);
+    });
+
+    it('vsscrollbox', function () {
+        expect(elm[0].querySelectorAll('.vsscrollbox').length).toBe(1);
+    });
 });
 

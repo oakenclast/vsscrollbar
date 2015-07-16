@@ -85,7 +85,8 @@ angular.module('vsscrollbar', [])
             scope: {
                 ngModel: '=?',
                 items: '=items',
-                onScrollChangeFn: '&'
+                onScrollChangeFn: '&',
+                onFocusScrollboxFn: '&'
             },
             transclude: true,
             templateUrl: 'templates/vsscrollbar.html',
@@ -101,6 +102,14 @@ angular.module('vsscrollbar', [])
 
                 scope.boxHeight = vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT;
                 scope.scrollbarVisible = true;
+
+                scope.scrollBoxFocus = function () {
+                    scope.onFocusScrollboxFn({focused: true});
+                };
+
+                scope.scrollBoxBlur = function () {
+                    scope.onFocusScrollboxFn({focused: false});
+                };
 
                 scrollbox.on('mousedown touchstart', onScrollMoveStart);
 
