@@ -1,4 +1,4 @@
-# vsscrollbar v. 0.1.3
+# vsscrollbar v. 0.1.4
 **Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component**
 
 ## Description
@@ -19,10 +19,10 @@ AngularJS directive which implements the virtual scroll, filtering of the items 
 
 ## Usage
 
-* include the **vsscrollbar-0.1.3.min.js** and the **vsscrollbar-0.1.3.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
+* include the **vsscrollbar-0.1.4.min.js** and the **vsscrollbar-0.1.4.min.css** files into your project. See the **Build project** and the **Installation** chapters below.
 ```html
-<script src="vsscrollbar-0.1.3.min.js"></script>
-<link href="vsscrollbar-0.1.3.min.css" rel="stylesheet" type="text/css">
+<script src="vsscrollbar-0.1.4.min.js"></script>
+<link href="vsscrollbar-0.1.4.min.css" rel="stylesheet" type="text/css">
 ```
 * inject the **vsscrollbar** module into your application module.
 ```js
@@ -140,7 +140,7 @@ In the **examples** folder of this project has the sample app and the online dem
 are [here](http://kekeh.github.io/vsscrollbar)
 
 ## Dependencies
-Depends on AngularJS. Implemented using the AngularJS version 1.3.16.
+Depends on AngularJS. Implemented using the AngularJS version 1.4.3.
 
 ## Build project
 * Build can be done by executing the **grunt** command. It creates the **dist/debug** and the **dist/min** folders and put files to these folders.
@@ -161,7 +161,7 @@ bower install vsscrollbar
 * Google Chrome 41.0.2272.101
 * Opera 28.0
 
-## Licence
+## License
 * License: MIT
 
 ## Author
