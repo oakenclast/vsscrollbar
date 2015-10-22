@@ -82,6 +82,7 @@ angular.module('vsscrollbar', [])
     .directive('vsscrollbar', ['$filter', '$timeout', '$document', 'vsscrollbarService', 'vsscrollbarConfig', function ($filter, $timeout, $document, vsscrollbarService, vsscrollbarConfig) {
         return {
             restrict: 'AE',
+            multiElement: true,
             scope: {
                 ngModel: '=?',
                 items: '=items',
