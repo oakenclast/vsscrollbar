@@ -2,17 +2,17 @@
 *  Name: vsscrollbar 
 *  Description: Virtual scroll with filtering and custom scrollbar - AngularJS reusable UI component 
 *  Homepage: http://kekeh.github.io/vsscrollbar 
-*  Version: 0.1.5 
+*  Version: 0.1.6 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2015-10-22 
+*  Date: 2016-01-13 
 */ 
-angular.module('template-vsscrollbar-0.1.5.html', []).run(['$templateCache', function($templateCache) {
+angular.module('template-vsscrollbar-0.1.6.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
     "<table class=vsscrollbarcontainer ng-show=\"filteredItems.length > 0\" style=border-collapse:separate;border-spacing:0;padding:0;height:100%><tr><td style=width:100%;padding:0;vertical-align:top><div class=vsscrollbarcontent ng-style=\"{'margin': scrollbarVisible ? '1px 0 1px 1px' : '1px'}\" style=overflow-y:hidden;padding:0;outline:0 ng-transclude></div></td><td style=padding:0;height:100%><div class=vsscrollbar ng-show=scrollbarVisible style=float:right;height:100%;padding:0;margin:1px><div class=vsscrollbox tabindex=0 ng-focus=scrollBoxFocus() ng-blur=scrollBoxBlur() ng-style=\"{'height': boxHeight + 'px'}\" ng-click=$event.stopPropagation() style=position:relative;padding:0;outline:0></div></div></td></tr></table>");
 }]);
 
-angular.module('vsscrollbar', ["template-vsscrollbar-0.1.5.html"])
+angular.module('vsscrollbar', ["template-vsscrollbar-0.1.6.html"])
     .constant('vsscrollbarConfig', {
         ITEMS_IN_PAGE: 6,
         SCROLLBAR_HEIGHT: 0,
@@ -185,10 +185,11 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.5.html"])
                 scrollbar.on('mousewheel DOMMouseScroll', onScrollMouseWheel);
 
                 function onScrollMouseWheel(event) {
+                    var event = window.event || event;
                     event.preventDefault();
                     var isDown = (event.wheelDelta || -event.detail) <= 0;
                     indexChange(isDown ? itemsInPage : -itemsInPage);
-                };
+                }
 
                 scrollbox.on('keydown', onKeydown);
 

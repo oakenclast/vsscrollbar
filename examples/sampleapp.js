@@ -1,4 +1,4 @@
-var sampleapp = angular.module('vssampleapp', ['vsscrollbar']);
+var sampleapp = angular.module('sampleapp', ['vsscrollbar']);
 
 // Example 1
 sampleapp.controller('vsScrollbarCtrl1', function ($scope, vsscrollbarEvent) {
