@@ -307,6 +307,8 @@ angular.module('vsscrollbar', [])
                 }
 
                 init();
+                scope.$watch('items', init);
+
             }
         };
     }]);

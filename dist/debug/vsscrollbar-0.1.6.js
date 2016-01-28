@@ -321,6 +321,8 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.6.html"])
                 }
 
                 init();
+                scope.$watch('items', init);
+
             }
         };
     }]);
