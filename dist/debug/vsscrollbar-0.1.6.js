@@ -5,7 +5,7 @@
 *  Version: 0.1.6 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2016-01-13 
+*  Date: 2016-01-28 
 */ 
 angular.module('template-vsscrollbar-0.1.6.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
@@ -185,9 +185,16 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.6.html"])
                 scrollbar.on('mousewheel DOMMouseScroll', onScrollMouseWheel);
 
                 function onScrollMouseWheel(event) {
+                    var isDown;
                     var event = window.event || event;
                     event.preventDefault();
-                    var isDown = (event.wheelDelta || -event.detail) <= 0;
+                    // jQuery mutates the event and moves these properties to event.originalEvent
+                    if (typeof event.originalEvent !== 'undefined') {
+                      isDown = (event.originalEvent.wheelDelta || -event.originalEvent.detail) <= 0;
+                    }
+                    else {
+                      isDown = (event.wheelDelta || -event.detail) <= 0;
+                    }
                     indexChange(isDown ? itemsInPage : -itemsInPage);
                 }
 

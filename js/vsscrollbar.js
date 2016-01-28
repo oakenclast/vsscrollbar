@@ -171,9 +171,16 @@ angular.module('vsscrollbar', [])
                 scrollbar.on('mousewheel DOMMouseScroll', onScrollMouseWheel);
 
                 function onScrollMouseWheel(event) {
+                    var isDown;
                     var event = window.event || event;
                     event.preventDefault();
-                    var isDown = (event.wheelDelta || -event.detail) <= 0;
+                    // jQuery mutates the event and moves these properties to event.originalEvent
+                    if (typeof event.originalEvent !== 'undefined') {
+                      isDown = (event.originalEvent.wheelDelta || -event.originalEvent.detail) <= 0;
+                    }
+                    else {
+                      isDown = (event.wheelDelta || -event.detail) <= 0;
+                    }
                     indexChange(isDown ? itemsInPage : -itemsInPage);
                 }
 
