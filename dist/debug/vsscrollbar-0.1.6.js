@@ -5,7 +5,7 @@
 *  Version: 0.1.6 
 *  Author: kekeh 
 *  License: MIT 
-*  Date: 2016-01-28 
+*  Date: 2016-03-16 
 */ 
 angular.module('template-vsscrollbar-0.1.6.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put("templates/vsscrollbar.html",
@@ -252,7 +252,10 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.6.html"])
                 }
 
                 function initScrollValues() {
-                    var height = Math.floor(scrollbarHeight / (scope.filteredItems.length / itemsInPage));
+                  var height;
+                  var boxHeightDivisor = scope.filteredItems.length >= itemsInPage ?
+                    scope.filteredItems.length / itemsInPage : 1;
+                  height = Math.floor(scrollbarHeight / boxHeightDivisor);
                     scope.boxHeight = height < vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT ? vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT : height;
                     maxIdx = scope.filteredItems.length - itemsInPage < 0 ? 0 : scope.filteredItems.length - itemsInPage;
                     maxPos = scrollbarHeight - scope.boxHeight < 0 ? 0 : scrollbarHeight - scope.boxHeight;
@@ -322,6 +325,11 @@ angular.module('vsscrollbar', ["template-vsscrollbar-0.1.6.html"])
 
                 init();
                 scope.$watch('items', init);
+                scope.$watch( function contentAreaHeight() {
+                  if (!attrs.height && scrollbarHeight !== scrollbarContent.prop('offsetHeight')) {
+                    setHeight();
+                  }
+                });
 
             }
         };

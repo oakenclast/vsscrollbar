@@ -238,7 +238,10 @@ angular.module('vsscrollbar', [])
                 }
 
                 function initScrollValues() {
-                    var height = Math.floor(scrollbarHeight / (scope.filteredItems.length / itemsInPage));
+                  var height;
+                  var boxHeightDivisor = scope.filteredItems.length >= itemsInPage ?
+                    scope.filteredItems.length / itemsInPage : 1;
+                  height = Math.floor(scrollbarHeight / boxHeightDivisor);
                     scope.boxHeight = height < vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT ? vsscrollbarConfig.SCROLLBOX_MIN_HEIGHT : height;
                     maxIdx = scope.filteredItems.length - itemsInPage < 0 ? 0 : scope.filteredItems.length - itemsInPage;
                     maxPos = scrollbarHeight - scope.boxHeight < 0 ? 0 : scrollbarHeight - scope.boxHeight;
@@ -308,6 +311,11 @@ angular.module('vsscrollbar', [])
 
                 init();
                 scope.$watch('items', init);
+                scope.$watch( function contentAreaHeight() {
+                  if (!attrs.height && scrollbarHeight !== scrollbarContent.prop('offsetHeight')) {
+                    setHeight();
+                  }
+                });
 
             }
         };

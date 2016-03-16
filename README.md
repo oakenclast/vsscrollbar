@@ -5,17 +5,17 @@
 AngularJS directive which implements the virtual scroll, filtering of the items and the customizable scrollbar
 
 ### 1. virtual scroll
-* good performance even millions of the items in the list
+* good performance even with millions of items in the list
 * only visible items are rendered in the browser
 
 ### 2. filtering
-* if scrollbar items are array of strings - filtering by string value
-* if scrollbar items are array of objects - filtering by string from all properties of the object
+* if scrollbar items are an array of strings - filtering by string value
+* if scrollbar items are an array of objects - filtering by string from all properties of the object
 
 ### 3. customizable scrollbar
 * custom scrollbar is used instead of native scrollbar of the browser
-* scrollbar can be easily customised using the CSS
-* scrollbar is looking similar in all browsers
+* scrollbar can be easily customised using CSS
+* scrollbar looks similar in all browsers
 
 ## Usage
 
@@ -60,7 +60,7 @@ It is also possible to use **ng-model="response"** instead of **on-scroll-change
 | :------------ |:---------------|:---------------:|
 | items | items passed to the vsscrollbar - parent can change content of the items variable by using service methods | yes |
 | items-in-page | visible item count in the vsscrollbar | yes |
-| height | height of the scrollbar | no |
+| height | height of the scrollbar. If not specified, scrollbar will resize dynamically based on the height of the content area | no |
 | on-scroll-change-fn | callback function which is called by the vsscrollbar when the scroll change occurs | yes if *ng-model* is not used |
 | on-focus-scrollbox-fn | callback function which is called by the vsscrollbar when the scrollbox get/lost focus | no |
 | ng-model | updated by the vsscrollbar when scroll change occurs | yes if *on-scroll-change-fn* is not used |
